@@ -82,6 +82,8 @@ class AURARuntimeManager:
 
         )
 
+        self.evolution = AURAEvolutionManager()
+
     def boot(self):
 
         self.event_bus.publish(
