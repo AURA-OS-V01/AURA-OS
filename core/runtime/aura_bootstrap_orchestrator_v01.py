@@ -19,6 +19,12 @@ from core.runtime.aura_module_registry_v01 import (
 
 )
 
+from core.runtime.aura_event_bus_v01 import (
+
+    AURAEventBus
+
+)
+
 class AURABootstrapOrchestrator:
 
     def __init__(self):
@@ -29,6 +35,8 @@ class AURABootstrapOrchestrator:
 
         self.registry = AURAModuleRegistry()
 
+        self.event_bus = AURAEventBus()
+
         self.status = "offline"
 
         self.started_at = None
@@ -36,6 +44,14 @@ class AURABootstrapOrchestrator:
     def start(self):
 
         self.runtime = AURAUnifiedIntelligenceRuntime()
+
+        self.event_bus.publish(
+
+            "aura.boot.started",
+
+            {"message": "AURA startup initiated"}
+
+        )
 
         self.registry.register(
 
@@ -77,6 +93,16 @@ class AURABootstrapOrchestrator:
 
         )
 
+        for module in self.registry.list_modules():
+
+            self.event_bus.publish(
+
+                "module.registered",
+
+                module
+
+            )
+
         self.runtime.register_module(
 
             "Core Reasoning Engine",
@@ -117,6 +143,20 @@ class AURABootstrapOrchestrator:
 
         ).isoformat()
 
+        self.event_bus.publish(
+
+            "aura.boot.completed",
+
+            {
+
+                "status": self.status,
+
+                "time": self.started_at
+
+            }
+
+        )
+
         return {
 
             "status": self.status,
@@ -124,6 +164,8 @@ class AURABootstrapOrchestrator:
             "started_at": self.started_at,
 
             "modules": self.registry.get_state(),
+
+            "events": self.event_bus.get_state(),
 
             "health": health_result
 
@@ -139,7 +181,9 @@ class AURABootstrapOrchestrator:
 
             "runtime_loaded": self.runtime is not None,
 
-            "modules": self.registry.count()
+            "modules": self.registry.count(),
+
+            "events": len(self.event_bus.get_events())
 
         }
 
