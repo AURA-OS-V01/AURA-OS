@@ -11,29 +11,31 @@ class AURAConsole:
 
         print()
 
-        print("=" * 50)
+        print("=" * 60)
 
-        print("        AURA MISSION CONSOLE")
+        print("  AURA MISSION CONSOLE")
 
-        print("=" * 50)
+        print("=" * 60)
 
-        print("Commands:")
+        print("""
 
-        print(" create <title> <objective>")
+Commands:
 
-        print(" task <agent> <task>")
+ create <title> <objective>
 
-        print(" run")
+ assign <agent> <task>
 
-        print(" status")
+ status
 
-        print(" exit")
+ run
 
-        print()
+ exit
+
+""")
 
         while True:
 
-            command = input("AURA> ")
+            command = input("> ")
 
             if command == "exit":
 
@@ -53,11 +55,7 @@ class AURAConsole:
 
             title = parts[1]
 
-            objective = " ".join(
-
-                parts[2:]
-
-            )
+            objective = " ".join(parts[2:])
 
             self.current_mission = (
 
@@ -79,7 +77,7 @@ class AURAConsole:
 
             )
 
-        elif parts[0] == "task":
+        elif parts[0] == "assign":
 
             if not self.current_mission:
 
@@ -89,11 +87,7 @@ class AURAConsole:
 
             agent = parts[1]
 
-            task = " ".join(
-
-                parts[2:]
-
-            )
+            task = " ".join(parts[2:])
 
             result = self.missions.add_task(
 

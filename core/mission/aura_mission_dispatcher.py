@@ -7,6 +7,12 @@ from core.agents.aura_agent_resolver import (
 
 )
 
+from core.execution.aura_agent_executor import (
+
+    AURAAgentExecutor
+
+)
+
 class AURAMissionDispatcher:
 
     def __init__(
@@ -29,6 +35,8 @@ class AURAMissionDispatcher:
 
         )
 
+        self.executor = AURAAgentExecutor()
+
         self.history = []
 
     def dispatch_next(self):
@@ -39,11 +47,17 @@ class AURAMissionDispatcher:
 
             return None
 
-        agent_name = task["agent"]
-
         agent = self.resolver.resolve(
 
-            agent_name
+            task["agent"]
+
+        )
+
+        execution = self.executor.execute(
+
+            agent,
+
+            task
 
         )
 
@@ -52,6 +66,8 @@ class AURAMissionDispatcher:
             "task": task,
 
             "agent": agent,
+
+            "execution": execution,
 
             "dispatched_at": datetime.now(
 
