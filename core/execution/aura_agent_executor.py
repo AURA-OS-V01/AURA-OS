@@ -5,9 +5,17 @@ from uuid import uuid4
 
 class AURAAgentExecutor:
 
-    def __init__(self):
+    def __init__(
+
+        self,
+
+        memory=None
+
+    ):
 
         self.results = []
+
+        self.memory = memory
 
     def execute(
 
@@ -29,13 +37,31 @@ class AURAAgentExecutor:
 
             "status": "completed",
 
-            "output": f"{agent['name']} completed: {task['task']}" if agent else "No agent found",
+            "output": (
 
-            "created": datetime.now(UTC).isoformat()
+                f"{agent['name']} completed: "
+
+                f"{task['task']}"
+
+            ) if agent else "No agent found",
+
+            "created": datetime.now(
+
+                UTC
+
+            ).isoformat()
 
         }
 
         self.results.append(result)
+
+        if self.memory:
+
+            self.memory.remember(
+
+                result
+
+            )
 
         return result
 
