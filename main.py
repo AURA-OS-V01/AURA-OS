@@ -1,21 +1,19 @@
 
-from core.runtime.aura_bootstrap_orchestrator_v01 import (
+from core.runtime.aura_runtime_manager import AURARuntimeManager
 
-    AURABootstrapOrchestrator
+from core.runtime.aura_control_center import AURAControlCenter
 
-)
+def main():
 
-print("=" * 60)
+    runtime = AURARuntimeManager()
 
-print("AURA OS STARTING")
+    boot = runtime.boot()
 
-print("=" * 60)
+    dashboard = AURAControlCenter()
 
-aura = AURABootstrapOrchestrator()
+    dashboard.render(boot)
 
-result = aura.start()
+if __name__ == "__main__":
 
-print("\nBOOT RESULT:")
-
-print(result)
+    main()
 
