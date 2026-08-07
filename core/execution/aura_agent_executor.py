@@ -9,13 +9,13 @@ class AURAAgentExecutor:
 
         self,
 
-        memory=None
+        memory_bridge=None
 
     ):
 
         self.results = []
 
-        self.memory = memory
+        self.memory_bridge = memory_bridge
 
     def execute(
 
@@ -55,9 +55,9 @@ class AURAAgentExecutor:
 
         self.results.append(result)
 
-        if self.memory:
+        if self.memory_bridge:
 
-            self.memory.remember(
+            self.memory_bridge.record_execution(
 
                 result
 
