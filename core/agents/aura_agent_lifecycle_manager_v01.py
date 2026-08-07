@@ -1,3 +1,4 @@
+
 from datetime import datetime, UTC
 
 from uuid import uuid4
@@ -100,28 +101,11 @@ class AURAAgentLifecycleManager:
 
         return self.agents.get(name)
 
-    def list_agents(
+    def list_agents(self):
 
-        self
+        return list(self.agents.values())
 
-    ):
+    def count(self):
 
-        return list(
+        return len(self.agents)
 
-            self.agents.values()
-
-        )
-
-    def get_state(
-
-        self
-
-    ):
-
-        return {
-
-            "total_agents": len(self.agents),
-
-            "agents": self.agents
-
-        }
