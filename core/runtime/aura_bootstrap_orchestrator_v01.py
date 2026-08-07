@@ -1,3 +1,4 @@
+
 from datetime import datetime, UTC
 
 from core.runtime.aura_unified_intelligence_runtime_v01 import (
@@ -12,6 +13,12 @@ from core.runtime.aura_health_check_v01 import (
 
 )
 
+from core.runtime.aura_module_registry_v01 import (
+
+    AURAModuleRegistry
+
+)
+
 class AURABootstrapOrchestrator:
 
     def __init__(self):
@@ -20,6 +27,8 @@ class AURABootstrapOrchestrator:
 
         self.health = None
 
+        self.registry = AURAModuleRegistry()
+
         self.status = "offline"
 
         self.started_at = None
@@ -27,6 +36,46 @@ class AURABootstrapOrchestrator:
     def start(self):
 
         self.runtime = AURAUnifiedIntelligenceRuntime()
+
+        self.registry.register(
+
+            "Core Runtime",
+
+            "system",
+
+            "AURA execution and reasoning foundation"
+
+        )
+
+        self.registry.register(
+
+            "Core Reasoning Engine",
+
+            "intelligence",
+
+            "Planning and decision support"
+
+        )
+
+        self.registry.register(
+
+            "Self Optimization Engine",
+
+            "intelligence",
+
+            "Performance improvement"
+
+        )
+
+        self.registry.register(
+
+            "Evolution Engine",
+
+            "intelligence",
+
+            "System adaptation"
+
+        )
 
         self.runtime.register_module(
 
@@ -74,6 +123,8 @@ class AURABootstrapOrchestrator:
 
             "started_at": self.started_at,
 
+            "modules": self.registry.get_state(),
+
             "health": health_result
 
         }
@@ -86,6 +137,9 @@ class AURABootstrapOrchestrator:
 
             "started_at": self.started_at,
 
-            "runtime_loaded": self.runtime is not None
+            "runtime_loaded": self.runtime is not None,
+
+            "modules": self.registry.count()
 
         }
+
