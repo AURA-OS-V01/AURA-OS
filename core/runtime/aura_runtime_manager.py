@@ -44,9 +44,14 @@ from core.mission.aura_mission_system import (
 from core.runtime.aura_evolution_manager import AURAEvolutionManager
 
 
+from core.storage.aura_persistent_store import AURAPersistentStore
+
+
 class AURARuntimeManager:
 
     def __init__(self):
+
+        self.storage = AURAPersistentStore()
 
         self.registry = AURAModuleRegistry()
 
