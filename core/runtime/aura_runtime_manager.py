@@ -41,6 +41,9 @@ from core.mission.aura_mission_system import (
 
 )
 
+from core.runtime.aura_evolution_manager import AURAEvolutionManager
+
+
 class AURARuntimeManager:
 
     def __init__(self):
