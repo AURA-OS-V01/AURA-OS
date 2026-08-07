@@ -16,5 +16,15 @@
     "agents": [],
     "events": [],
     "lessons": [],
-    "created": "2026-08-07T17:41:55.755343+00:00"
+    "created": "2026-08-07T17:41:55.755343+00:00",
+    "tasks": [
+        {
+            "id": "e8c2feb6-2039-43b1-a127-315859c26cf2",
+            "mission": "ad3f9695-893b-4430-8e52-8e5213310839",
+            "agent": "frontend_builder",
+            "task": "Build UI",
+            "status": "queued",
+            "created": "2026-08-07T18:27:39.719529+00:00"
+        }
+    ]
 }

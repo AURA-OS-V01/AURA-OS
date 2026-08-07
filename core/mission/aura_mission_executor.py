@@ -1,4 +1,6 @@
 
+from core.storage.aura_persistent_store import AURAPersistentStore
+
 from core.scheduler.aura_task_scheduler import (
 
     AURATaskScheduler
@@ -20,6 +22,7 @@ class AURAMissionExecutor:
         self.missions = mission_manager
 
         self.scheduler = scheduler
+        self.storage = AURAPersistentStore()
 
     def assign(
 
@@ -46,6 +49,14 @@ class AURAMissionExecutor:
         self.missions.add_task(
 
             mission_id,
+
+            scheduled
+
+        )
+
+        self.storage.add(
+
+            "tasks",
 
             scheduled
 
