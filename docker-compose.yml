@@ -1,0 +1,11 @@
+
+services:
+
+  aura:
+
+    build: .
+
+    container_name: aura-os
+
+    restart: unless-stopped
+
