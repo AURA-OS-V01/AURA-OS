@@ -1,0 +1,20 @@
+{
+    "missions": [
+        {
+            "name": "Persistence Test"
+        },
+        {
+            "id": "494ec681-7e67-494b-8d0a-b2953913e83d",
+            "title": "task_persistence",
+            "objective": "Verify task layer",
+            "priority": "normal",
+            "status": "created",
+            "tasks": [],
+            "created": "2026-08-07T18:19:32.730638+00:00"
+        }
+    ],
+    "agents": [],
+    "events": [],
+    "lessons": [],
+    "created": "2026-08-07T17:41:55.755343+00:00"
+}

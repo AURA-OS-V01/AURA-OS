@@ -23,6 +23,9 @@ from core.mission.aura_mission_dispatcher import (
 
 )
 
+from core.storage.aura_persistent_store import AURAPersistentStore
+
+
 class AURAMissionSystem:
 
     def __init__(
@@ -32,6 +35,8 @@ class AURAMissionSystem:
         bridge
 
     ):
+
+        self.storage = AURAPersistentStore()
 
         self.manager = AURAMissionManager()
 
@@ -63,13 +68,23 @@ class AURAMissionSystem:
 
     ):
 
-        return self.manager.create(
+        mission = self.manager.create(
 
             title,
 
             objective
 
         )
+
+        self.storage.add(
+
+            "missions",
+
+            mission
+
+        )
+
+        return mission
 
     def add_task(
 
