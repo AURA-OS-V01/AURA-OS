@@ -1,6 +1,7 @@
 class AURAExecutor:
 
     """
+from core.storage.aura_persistent_store import AURAPersistentStore
 
     Main autonomous mission executor.
 
@@ -19,6 +20,7 @@ class AURAExecutor:
         self.planner = planner
 
         self.connector = connector
+        self.storage = AURAPersistentStore()
 
     def execute(
 
@@ -44,7 +46,7 @@ class AURAExecutor:
 
         )
 
-        return {
+        execution_record = {
 
             "objective": objective,
 
@@ -52,6 +54,16 @@ class AURAExecutor:
 
             "execution": result,
 
-            "status": "running"
+            "status": "completed"
 
         }
+
+        self.storage.add(
+
+            "executions",
+
+            execution_record
+
+        )
+
+        return execution_record
