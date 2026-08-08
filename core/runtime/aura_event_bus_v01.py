@@ -2,11 +2,14 @@ from datetime import datetime, UTC
 
 from uuid import uuid4
 
+from core.storage.aura_persistent_store import AURAPersistentStore
+
 class AURAEventBus:
 
     def __init__(self):
 
         self.events = []
+        self.storage = AURAPersistentStore()
 
         self.listeners = {}
 
@@ -55,6 +58,14 @@ class AURAEventBus:
         }
 
         self.events.append(
+
+            event
+
+        )
+
+        self.storage.add(
+
+            "events",
 
             event
 
