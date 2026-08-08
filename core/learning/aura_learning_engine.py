@@ -3,11 +3,14 @@ from datetime import datetime, UTC
 
 from uuid import uuid4
 
+from core.storage.aura_persistent_store import AURAPersistentStore
+
 class AURALearningEngine:
 
     def __init__(self):
 
         self.lessons = []
+        self.storage = AURAPersistentStore()
 
     def learn(
 
@@ -42,6 +45,14 @@ class AURALearningEngine:
         }
 
         self.lessons.append(
+
+            lesson
+
+        )
+
+        self.storage.add(
+
+            "lessons",
 
             lesson
 
