@@ -1,4 +1,6 @@
 
+from core.storage.aura_persistent_store import AURAPersistentStore
+
 from core.learning.aura_learning_engine import (
 
     AURALearningEngine
@@ -14,6 +16,7 @@ from core.evolution.aura_self_improvement_loop import (
 class AURAEvolutionManager:
 
     def __init__(self):
+        self.storage = AURAPersistentStore()
 
         self.learning = AURALearningEngine()
 
@@ -43,7 +46,17 @@ class AURAEvolutionManager:
 
     def analyze(self):
 
-        return self.improvement.analyze()
+        result = self.improvement.analyze()
+
+        self.storage.add(
+
+            "improvements",
+
+            result
+
+        )
+
+        return result
 
     def status(self):
 
